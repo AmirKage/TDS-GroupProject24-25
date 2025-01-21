@@ -1,0 +1,34 @@
+import random
+import json
+
+# Define questions
+questions = [
+    "What is your favorite hobby, and why?",
+    "What is one challenge you face in your daily life, and how do you manage it?",
+    "What is your opinion on the importance of technology in education?"
+]
+
+# Helper function to generate random responses
+def generate_responses(prompt, num_responses=100):
+    responses = []
+    for _ in range(num_responses):
+        response = f"{prompt} Response #{random.randint(1, 100)}: This is a simulated response with some unique twist {random.choice(['!', '.', '?'])}"
+        responses.append(response)
+    return responses
+
+# Generate dataset
+data = {"responses": []}
+
+for question in questions:
+    question_data = {
+        "question": question,
+        "answers": generate_responses(question)
+    }
+    data["responses"].append(question_data)
+
+# Save dataset to JSON file
+output_file = "qna_dataset.json"
+with open(output_file, "w") as f:
+    json.dump(data, f, indent=4)
+
+print(f"Dataset saved to {output_file}.")
